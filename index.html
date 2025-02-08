@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en-EN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mightyvisuals</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico" />
+  </head>
+
+  <body>
+
+    <img class="go-up" src="icons/chevron.png" alt="chevron-icon"/>
+    <img id="close" src="icons/close.png" alt="close-icon"/> 
+    <input type="button" class="pause-icon" title="Pause (p)">
+    <p class="version">v1.0</p>
+    <p class="arrow-text">or use the <em>arrow keys</em></p>
+
+    <canvas class="canvas-phys"></canvas>
+      <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sleigh" class="svg-inline--fa fa-sleigh fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M612.7 350.7l-9.3-7.4c-6.9-5.5-17-4.4-22.5 2.5l-10 12.5c-5.5 6.9-4.4 17 2.5 22.5l9.3 7.4c5.9 4.7 9.2 11.7 9.2 19.2 0 13.6-11 24.6-24.6 24.6H48c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h516c39 0 73.7-29.3 75.9-68.3 1.4-23.8-8.7-46.3-27.2-61zM32 224c0 59.6 40.9 109.2 96 123.5V400h64v-48h192v48h64v-48c53 0 96-43 96-96v-96c17.7 0 32-14.3 32-32s-14.3-32-32-32h-96v64c0 35.3-28.7 64-64 64h-20.7c-65.8 0-125.9-37.2-155.3-96-29.4-58.8-89.6-96-155.3-96H32C14.3 32 0 46.3 0 64s14.3 32 32 32v128z"></path></svg>-->
+
+    <div id="slide-container">
+      <div class="slide">
+        <img class="logo" src="icons/mvisuals-logo.png" height="90" alt="logo" />
+      </div>
+    </div>
+
+    <div id="mode-container">
+      <img class="mode-toggle1" src="icons/light.png" alt="lightmode" height="50" width="50"/>
+      <img class="mode-toggle2" src="icons/dark.png" alt="darkmode" />
+    </div>
+
+    <div id="wrapper">
+      <img class="show-items" src="icons/chevron-items.png" alt="chevron-items-icon"/>
+      <div id="item-container">               
+        <div id="shape-container">              
+          <div class="circle">
+            <img class="circle-inner" src="icons/shapes/circle.png" alt="circle-inner" height="80">
+          </div>
+          <input type="checkbox" id="circle-check" checked="true">
+        
+          <div class="triangle">
+            <img class="triangle-inner" src="icons/shapes/triangle.png" alt="triangle-inner" height="80">
+          </div>
+          <input type="checkbox" id="triangle-check">
+
+          <div class="polygon">
+            <img class="poly-inner" src="icons/shapes/poly.png" alt="poly-inner" height="80">
+          </div>
+          <input type="checkbox" id="poly-check">
+        </div>
+
+        <div id="size-select">
+           <img class="plus" src="icons/plus.png" alt="plus-icon">
+           <img class="minus" src="icons/minus.png" alt="minus-icon">
+        </div>
+
+        <div class="generate">
+          <p style="font-size: 1.3vw;"><b>add</b></p>
+        </div>
+      </div>
+      
+      <div id="what-toggle">
+        <img class="what-icon" src="icons/what.png" alt="what-icon" />
+      </div>
+
+      <div id="body-toggle">
+        <img title="Body Settings" class="setting-icon" src="icons/setting.png" alt="setting-icon"/>
+       </div>
+
+       <div id="setting-drop">
+        <p class="drop-text"><em>body size:</em></p>
+        <p class="drop-text color-text"><em>body color:</em></p>
+        <p class="attract-text"><em>enable attraction:</em></p>
+        <input type="checkbox" id="attract-check">
+
+        <div id="range-slider">
+
+          <input type="image" src="icons/reset.png" class="reset-size" title="Reset">
+
+          <input type="image" src="icons/reset.png" class="reset-color" title="Reset">
+
+            <div class="drop-thumb"></div>
+            <div class="color-thumb"></div>
+            <input type="range" min="1" max="25" class="drop-slider" value="10">
+            <input type="range" min="1" max="300" class="color-slider" value="110">
+            <div class="drop-progress"></div>
+            <div class="color-progress"></div>
+        </div>     
+       </div>
+
+    <div id="range-wrapper">
+      <div id="other-toggle">
+        <img title="Go Back" class="back-icon" src="icons/back.png" alt="back-icon"/>
+        <img title="Reset (r)" class="reset-icon" src="icons/reset.png" alt="reset-icon"/>
+        <div title="Gravity (g)" class="gravity-icon" alt="gravity-icon"></div>
+      </div>
+    
+      <div id="phys-toggle">
+        <img class="forceup-icon" src="icons/force.png" alt="forceup-icon" />
+        <img class="forcedown-icon" src="icons/force.png" alt="forcedown-icon" />
+        <img class="forceleft-icon" src="icons/force.png" alt="forceleft-icon" />
+        <img class="forceright-icon" src="icons/force.png" alt="forceright-icon" />
+      </div>
+
+    </div>  
+    </div>
+
+    <div id="design-container">
+      <img class="design no1" src="media/designs/intrex.png" alt="intrex" />
+      <img class="design pop no2" src="media/designs/noctuoidad3.png" alt="noctuoid"/>
+      <img class="design pop no3" src="media/designs/thirdstep.png" alt="thirdstep" />
+      <img class="design pop no4" src="media/designs/plexarts.png" alt="plexarts" />
+      <img class="design pop no5 vert" src="media/designs/influx.png" alt="influx" />
+      <img class="design pop no6 vert" src="media/designs/exclex1.png" alt="exclex" />
+    </div>
+
+    <video muted loop src="media/videos/intrexvid.mp4" class="design vid1" id="vid" type="video/mp4"></video>
+
+    <script src="script.js"></script>
+    <script src="libs/matter.js"></script>
+    <script src="libs/matter-attractors.js"></script>
+    <script src="libs/decomp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.js"></script>
+    
+  </body>
+</html>
