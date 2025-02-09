@@ -623,9 +623,9 @@ img{
     position: absolute;
     z-index: 2;
     border-radius: 16px;
-    top: 11.2vh;
+    top: 6vw;
     left: 0.1vh;
-    height: 33%;
+    height: 35%;
     width: 38%;
     opacity: 0%;
     cursor: pointer;
@@ -640,7 +640,7 @@ img{
     top: 2.7vh;
     left: 35%;
     width: 6%;
-    height: 35%;
+    height: 37%;
     pointer-events: none;
     cursor: pointer;
     background-color: rgb(255, 255, 255);
@@ -807,8 +807,7 @@ img{
     opacity: 1;
     left: 94%;
     height: 8%;
-    animation: none;
-    visibility: hidden;
+    animation: fader 1s forwards;
     transform: rotate(45deg);
     transition: all 0.3s ease-in-out; 
 }
@@ -940,7 +939,7 @@ img{
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .blur{

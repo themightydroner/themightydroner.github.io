@@ -39,7 +39,7 @@ if(localStorage.getItem('togMode')==='false'){
     light.classList.add('mode-opac');
     dark.style.animation = 'fader 0.3s forwards';
     body.classList.add('lighten');
-    document.getElementById('what-toggle').style.filter = 'invert(0)'
+    document.getElementById('what-toggle').classList.add('invert');
     document.getElementById('item-container').style.backgroundColor = 'rgb(27, 27, 27)';
     document.getElementById('setting-drop').style.backgroundColor = 'rgb(27, 27, 27)';
     oneInvertElems.forEach(e => e.style.filter = 'invert(1)');
@@ -89,8 +89,7 @@ toggle.addEventListener("click", function (){
         light.classList.remove('mode-opac');
         dark.style.animation = 'faderOut 0.3s forwards';
         body.classList.remove('lighten');
-        document.getElementById('what-toggle').style.filter=''
-        document.getElementById('what-toggle').classList.add('invert');
+        document.getElementById('what-toggle').classList.remove('invert');
         document.getElementById('item-container').style.backgroundColor = '';
         document.getElementById('setting-drop').style.backgroundColor = '';
         oneInvertElems.forEach(e => e.style.filter = 'invert(0)');
@@ -102,8 +101,7 @@ toggle.addEventListener("click", function (){
         light.classList.add('mode-opac');
         dark.style.animation = 'fader 0.3s forwards';
         body.classList.add('lighten');
-        document.getElementById('what-toggle').style.filter=''
-        document.getElementById('what-toggle').classList.remove('invert');
+        document.getElementById('what-toggle').classList.add('invert');
         document.getElementById('item-container').style.backgroundColor = 'rgb(27, 27, 27)';
         document.getElementById('setting-drop').style.backgroundColor = 'rgb(27, 27, 27)';
         oneInvertElems.forEach(e => e.style.filter = 'invert(1)');
@@ -213,18 +211,11 @@ document.getElementById('close').addEventListener("click", function closeVid(){
 
 const physToggle = document.getElementById('what-toggle');
 
-window.addEventListener("load", function (){
-    physToggle.classList.add('invert');
-setTimeout(() => {physToggle.style.animation = 'fader 1s forwards'; 
-    physToggle.style.visibility = 'visible';
-    physToggle.classList.add('rotate')}, "1000");  
-});
-
-
 
 physToggle.addEventListener("click", function matterEnable(){
     document.body.style.userSelect = 'none'
     sli.style.pointerEvents = 'none';
+    des.style.pointerEvents = 'none';
     toggle.style.pointerEvents = 'none';
     toggle.style.zIndex = 0;
     physToggle.style.animation = 'faderOut 0.3s forwards';
@@ -403,7 +394,7 @@ window.addEventListener('resize', () => {
     w:25,
     h:25,
     elem: document.querySelector("#mode-container"),
-    body: Matter.Bodies.circle(70, 75, 25, {
+    body: Matter.Bodies.circle(65, 75, 25, {
         restitution: 0.6,
         friction: 0.0001,
         frictionAir: 0.000001,
@@ -420,7 +411,7 @@ window.addEventListener('resize', () => {
         const {x, y} = this.body.position;
         this.elem.style.top = `${y-75}px`;
         this.elem.style.bottom = `${y}px`;
-        this.elem.style.left = `${x-51}px`;
+        this.elem.style.left = `${x-45}px`;
     },
   };
 
@@ -441,15 +432,13 @@ speedReset();
 
 function forceUp() {
     Body.applyForce(logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: -100});
-    Body.applyForce(mode.body, {x: mode.body.position.x, y: mode.body.position.y}, {x: 0, y: -0.1});
     if (engine.gravity.y === 10) {
         Body.applyForce(logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: -200});
-        Body.applyForce(mode.body, {x: mode.body.position.x, y: mode.body.position.y}, {x: 0, y: -0.3});
     }
 
     const bodies = Matter.Composite.allBodies(world);
     bodies.forEach(body => {
-        if (body != mode.body) {
+        if (body != logo.body) {
             Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 0, y: -1});
             if (engine.gravity.y === 10) {
                 Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 0, y: -2});
@@ -460,15 +449,13 @@ function forceUp() {
 
 function forceDown() {
     Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: 100});
-    Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: 0.1});
     if (engine.gravity.y === 10) {
         Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: 200});
-        Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0, y: 0.3});
     }
 
     const bodies = Matter.Composite.allBodies(world);
     bodies.forEach(body => {
-        if (body != mode.body) {
+        if (body != logo.body) {
             Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 0, y: 1});
             if (engine.gravity.y === 10) {
                 Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 0, y: 2});
@@ -479,15 +466,13 @@ function forceDown() {
 
 function forceLeft() {
     Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: -100, y: 0});
-    Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: -0.1, y: 0});
     if (engine.gravity.y === 10) {
         Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: -200, y: 0});
-        Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: -0.3, y: 0});
     }
 
     const bodies = Matter.Composite.allBodies(world);
     bodies.forEach(body => {
-        if (body != mode.body) {
+        if (body != logo.body) {
             Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: -1, y: 0});
             if (engine.gravity.y === 10) {
                 Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: -2, y: 0});
@@ -498,15 +483,13 @@ function forceLeft() {
 
 function forceRight() {
     Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 100, y: 0});
-    Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0.1, y: 0});
     if (engine.gravity.y === 10) {
         Body.applyForce( logo.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 200, y: 0});
-        Body.applyForce( mode.body, {x: logo.body.position.x, y: logo.body.position.y}, {x: 0.3, y: 0});
     }
 
     const bodies = Matter.Composite.allBodies(world);
     bodies.forEach(body => {
-        if (body != mode.body) {
+        if (body != logo.body) {
             Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 1, y: 0});
             if (engine.gravity.y === 10) {
                 Body.applyForce(body, {x: body.position.x, y: body.position.y}, {x: 2, y: 0});
