@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="446" height="70" viewBox="0 0 446 70">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2e2e2e;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Rectángulo_redondeado_4" data-name="Rectángulo redondeado 4" class="cls-1" d="M23,24H423a23,23,0,0,1,0,46H23A23,23,0,0,1,23,24ZM177,0h96a10,10,0,0,1,10,10v3a10,10,0,0,1-10,10H177a10,10,0,0,1-10-10V10A10,10,0,0,1,177,0Z"/>
+</svg>
