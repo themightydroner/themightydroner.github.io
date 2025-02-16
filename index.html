@@ -3,7 +3,7 @@
 <html lang="en-EN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <title>mightyvisuals</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/x-icon" href="icons/favicon.ico" />
@@ -13,8 +13,11 @@
 
     <img class="go-up" src="icons/chevron.png" alt="chevron-icon"/>
     <img id="close" src="icons/close.png" alt="close-icon"/> 
-    <input type="button" class="pause-icon" title="Pause (p)">
-    <p class="version">v1.0</p>
+    <div class="pause-icon" title="Pause (p)">
+      <img class="pause" src="icons/pause.png" alt="pause-icon">
+      <img class="play" src="icons/play.png" alt="play-icon">
+    </div>
+    <p class="version">v1.01</p>
     <p class="arrow-text">or use the <em>arrow keys</em></p>
 
     <canvas class="canvas-phys"></canvas>
@@ -28,7 +31,7 @@
 
     <div id="mode-container">
       <img class="mode-toggle1" src="icons/light.png" alt="lightmode" height="50" width="50"/>
-      <img class="mode-toggle2" src="icons/dark.png" alt="darkmode" />
+      <img class="mode-toggle2" src="icons/dark.png" alt="darkmode" height="50"/>
     </div>
 
     <div id="wrapper">
@@ -57,12 +60,12 @@
         </div>
 
         <div class="generate">
-          <p style="font-size: 1.3vw;"><b>add</b></p>
+          <b style="font-size: 1.3vw;">add</b>
         </div>
       </div>
       
       <div id="what-toggle">
-        <img class="what-icon" src="icons/what.png" alt="what-icon" />
+        <img class="what-icon" src="icons/what.png" alt="what-icon"/>
       </div>
 
       <div id="body-toggle">
@@ -108,15 +111,15 @@
     </div>
 
     <div id="design-container">
-      <img class="design no1" src="media/designs/intrex.png" alt="intrex" />
+      <img class="design no1" src="media/designs/intrex.png" alt="intrex"/>
       <img class="design pop no2" src="media/designs/noctuoidad3.png" alt="noctuoid"/>
+      <img class="design pop no4" src="media/designs/plexarts.jpg" alt="plexarts" />
       <img class="design pop no3" src="media/designs/thirdstep.png" alt="thirdstep" />
-      <img class="design pop no4" src="media/designs/plexarts.png" alt="plexarts" />
       <img class="design pop no5 vert" src="media/designs/influx.png" alt="influx" />
       <img class="design pop no6 vert" src="media/designs/exclex1.png" alt="exclex" />
     </div>
 
-    <video muted loop src="media/videos/intrexvid.mp4" class="design vid1" id="vid" type="video/mp4"></video>
+    <video muted loop preload="none" src="media/videos/intrexvid.mp4" id="vid" type="video/mp4"></video>
 
     <script src="script.js"></script>
     <script src="libs/matter.js"></script>

@@ -16,7 +16,9 @@ const oneInvertElems = [
     document.querySelector('.polygon'),
     document.querySelector('.reset-size'),
     document.querySelector('.reset-color'),
-    document.getElementById('size-select')
+    document.getElementById('size-select'),
+    document.querySelector('.version'),
+    document.querySelector('.arrow-text')
 ];
 
 const zeroInvertElems = [
@@ -47,39 +49,39 @@ if(localStorage.getItem('togMode')==='false'){
     document.querySelectorAll('[type=checkbox]').forEach(checkbox => {checkbox.classList.add('help')});
 };
 
-document.querySelector('.logo').addEventListener("click", function slideAnim (){
-
-    sli2.classList.add('disabled');
-    body.style.overflow = 'visible';
-    sli2.classList.add('slide-anim'); 
-    sli.classList.add('slide-anim2');
+document.querySelector('.logo').addEventListener("click", function slideAnim (){ 
     
     const vis = window.getComputedStyle(des).visibility;
 
     if (vis === 'hidden') {
-        sli2.classList.remove('slide-rever');
-        sli.classList.remove('slide-rever2');
+        body.style.overflow = 'visible';
+        sli2.classList.add('slide-anim');
+        sli2.classList.add('disabled');
+        sli.style.pointerEvents = 'none';
+
         setTimeout(() => {des.style.visibility = 'visible';
-        des.style.animation = 'fader 0.5s'}, "600");
+            sli.style.pointerEvents = '';
+            des.style.animation = 'fader 0.5s'}, "600");
+
         physToggle.style.animation = 'faderOut 0.3s forwards';
         setTimeout(() => {physToggle.style.visibility = 'hidden';}, "300");
         desFade();
         
     } else {
         body.style.overflow = 'hidden';
-        sli2.classList.add('slide-rever');
-        sli.classList.add('slide-rever2');
+        sli2.classList.remove('slide-anim');
         sli.style.pointerEvents = 'none'; 
+
         setTimeout(() => {sli2.classList.remove('disabled');
-            sli.style.pointerEvents = ''; 
-            sli2.classList.remove('slide-anim2');
-            sli.classList.remove('slide-anim');}, "1000");
+            sli.style.pointerEvents = '';}, "1000");
+
         des.style.removeProperty('animation');    
         des.style.animation = 'faderOut 0.3s forwards';
         setTimeout(() => {des.style.visibility = 'hidden'}, "300");
-        physToggle.style.visibility = 'visible';
-        setTimeout(() => {physToggle.style.animation = 'fader 0.3s forwards'}, "1000");
-        
+
+        setTimeout(() => {physToggle.style.visibility = 'visible';
+            physToggle.style.animation = 'fader 0.3s forwards'}, "1000");
+
         window.scrollTo(0,0);
     }    
 })
@@ -109,7 +111,6 @@ toggle.addEventListener("click", function (){
         document.querySelectorAll('[type=checkbox]').forEach(checkbox => {checkbox.classList.add('help')});
         localStorage.setItem('togMode', false)
     }
-
 });
 
 let designArray = document.querySelectorAll('.pop');
@@ -120,7 +121,7 @@ window.addEventListener("scroll", desFade);
 function desFade(){
     for (let i = 0; i < designArray.length; i++) {
         let element = designArray[i];
-        let objInView = element.getBoundingClientRect().top - window.innerHeight/2 -100;
+        let objInView = element.getBoundingClientRect().top - window.innerHeight/2 -250;
         if (objInView < 0) {
             element.classList.add('pop-anim');
             element.style.visibility = 'visible';     
@@ -160,15 +161,15 @@ document.querySelectorAll('.design').forEach(e => e.addEventListener("mouseout",
 }));
 
 const vid = document.getElementById('vid');
-const insvid = document.querySelectorAll('.design');
-const vidvis = window.getComputedStyle(vid).visibility;
 
 // have to do this within an array of vids for the other designs (only one finished so far)
 document.querySelector('.no1').addEventListener("click", function(){
     body.style.overflow = 'hidden';
-    wrapper.style.pointerEvents = 'none';
     des.style.pointerEvents = 'none';
-    vid.classList.add('disabled');
+    toggle.style.pointerEvents = 'none';
+    toggle.style.opacity = '25%';
+    des.classList.add('opac');
+    vid.style.pointerEvents = 'none';
     document.getElementById('close').style.visibility = 'visible';
     document.getElementById('close').style.animation = 'fader 1s forwards';
     vid.play();
@@ -179,38 +180,34 @@ document.querySelector('.no1').addEventListener("click", function(){
     else{
         body.classList.add('darken');
     }
-    wrapper.style.opacity = '25%'; 
-    des.style.opacity = '25%';
+    
     vid.style.visibility = 'visible';
     
 });
 
 document.getElementById('close').addEventListener("click", function closeVid(){
     body.style.overflow = 'visible';
-    wrapper.style.pointerEvents = '';
-    des.style.pointerEvents = '';
     body.classList.remove('darken');
-    wrapper.style.opacity = '';
-    des.style.opacity = '';
+    des.style.pointerEvents = '';
+    toggle.style.opacity = '';
+    toggle.style.pointerEvents = '';
+    des.classList.remove('opac');
     document.getElementById('close').style.animation = 'faderOut 0.3s forwards'
     setTimeout(() => {document.getElementById('close').style.visibility = 'hidden';}, "300");
     vid.pause();
     vid.currentTime=0;
     vid.style.removeProperty('animation');
-    vid.style.animation = 'faderOut 0.3s forwards'
+    vid.style.animation = 'faderOut 0.3s forwards';
     if(light.classList.contains('mode-opac')){
         body.classList.remove('darken-light');
     }
     else{
         body.classList.remove('darken');
     }
-    setTimeout(() => {vid.style.visibility = 'hidden'}, "300");
-    document.getElementById('close').style.animation = 'faderOut 0.3s forwards'
-    setTimeout(() => {document.getElementById('close').style.visibility = 'hidden'}, "300");   
+    setTimeout(() => {vid.style.visibility = 'hidden'}, "300"); 
 });
 
 const physToggle = document.getElementById('what-toggle');
-
 
 physToggle.addEventListener("click", function matterEnable(){
     document.body.style.userSelect = 'none'
@@ -498,7 +495,6 @@ function forceRight() {
     });
 }
 
-
 document.querySelector('.forceup-icon').addEventListener('click', forceUp);
 document.querySelector('.forcedown-icon').addEventListener('click', forceDown);
 document.querySelector('.forceleft-icon').addEventListener('click', forceLeft);
@@ -541,13 +537,13 @@ Matter.Composite.add(engine.world, bodies);*/
 
 let mouse = Mouse.create(document.body);
 let mouseConstraint = Matter.MouseConstraint.create(engine, {
-  mouse: mouse,
-  constraint: {
-    stiffness: 1,
-    render: {
-      visible: false
+    mouse: mouse,
+    constraint: {
+        stiffness: 1,
+        render: {
+            visible: false
+        }
     }
-  }
 });
 
 mouse.element.removeEventListener("wheel", mouse.mousewheel);
@@ -558,12 +554,14 @@ Matter.Composite.add(engine.world, mouseConstraint)
 
 render.mouse = mouse;
 
-(function rerender() {
+function rerender() {
     logo.render();
     mode.render();
     //Matter.Engine.update(engine);//
     requestAnimationFrame(rerender);
-})();
+};
+
+rerender();
 
 document.querySelector(".back-icon").addEventListener("click", function(){
     window.top.location = window.top.location;
@@ -571,12 +569,8 @@ document.querySelector(".back-icon").addEventListener("click", function(){
 
 let cooldown = false;
 
-function matterReset(){
-    
-    if (cooldown) {
-        return;
-    }
-
+function matterReset(){   
+    if (cooldown) {return;}
     cooldown = true;
     setTimeout(() => {cooldown = false;}, '500')
 
@@ -629,7 +623,7 @@ function matterPause() {
                 body.isStatic = false;
             }
         });
-        document.querySelector('.pause-icon').classList.remove('play-icon');
+        document.querySelector('.play').classList.remove('full-opac');
         wrapper.classList.remove('opac');
         wrapper.style.pointerEvents = '';
         if(light.classList.contains('mode-opac')){
@@ -646,7 +640,7 @@ function matterPause() {
             bodies.forEach(body => {
                 body.isStatic = true;
         });
-        document.querySelector('.pause-icon').classList.add('play-icon')
+        document.querySelector('.play').classList.add('full-opac')
         wrapper.classList.add('opac');
         wrapper.style.pointerEvents = 'none';
         if(light.classList.contains('mode-opac')){
@@ -664,7 +658,6 @@ document.querySelector('.pause-icon').addEventListener('click', matterPause);
 const ranWrapper = document.getElementById('range-wrapper');
 
 document.querySelector('.setting-icon').addEventListener("click", function(){
-    
     if (ranWrapper.classList.contains('opac')) {
         const bodies = Matter.Composite.allBodies(world);
         bodies.forEach(body => {
@@ -922,26 +915,45 @@ let triSize = 30;
 let polySize = 30;
 
 plus.addEventListener('click', function(){
-    if(circleChck.checked === true){circle.classList.remove('shape-shrink');}
-    if(triangleChck.checked === true){triangle.classList.remove('shape-shrink');}
-    if(polyChck.checked === true){poly.classList.remove('shape-shrink');} 
+    if(circleChck.checked === true){
+        circle.classList.remove('shape-shrink');
+        circle.classList.add('shape-grow'); 
+        cirSize = 100;
+    } 
 
-    if(circleChck.checked === true){circle.classList.add('shape-grow'); cirSize = 100}
-    if(triangleChck.checked === true){triangle.classList.add('shape-grow'); triSize = 100}
-    if(polyChck.checked === true){poly.classList.add('shape-grow'); polySize = 100}
+    if(triangleChck.checked === true){
+        triangle.classList.remove('shape-shrink');
+        triangle.classList.add('shape-grow'); 
+        triSize = 100;
+    }
+
+    if(polyChck.checked === true){
+        poly.classList.remove('shape-shrink');
+        poly.classList.add('shape-grow'); 
+        polySize = 100;
+    } 
 });
 
 minus.addEventListener('click', function(){
-    if (circle.classList.contains('shape-grow')) {
+    if (circle.classList.contains('shape-grow') || triangle.classList.contains('shape-grow') || poly.classList.contains('shape-grow')) {
         if(circleChck.checked === true){circle.classList.remove('shape-grow'); cirSize = 50;}
         if(triangleChck.checked === true){triangle.classList.remove('shape-grow'); triSize = 50;}
         if(polyChck.checked === true){poly.classList.remove('shape-grow'); polySize = 50;}
         
     }
     else{
-        if(circleChck.checked === true){circle.classList.add('shape-shrink'); cirSize = 8;}
-        if(triangleChck.checked === true){triangle.classList.add('shape-shrink'); triSize = 8}
-        if(polyChck.checked === true){poly.classList.add('shape-shrink'); polySize = 8}
+        if(circleChck.checked === true){
+            circle.classList.add('shape-shrink'); 
+            cirSize = 8;
+        }
+        if(triangleChck.checked === true){
+            triangle.classList.add('shape-shrink'); 
+            triSize = 8;
+        }
+        if(polyChck.checked === true){
+            poly.classList.add('shape-shrink'); 
+            polySize = 8;
+        }
     }   
 });
 
